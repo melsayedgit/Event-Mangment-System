@@ -1,6 +1,6 @@
-const mongooes = require('mongoose');
+const mongoose = require('mongoose');
 
-const StudentSchema = new mongooes.Schema({
+const StudentSchema = new mongoose.Schema({
     _id:Number,
     email:{
         type:String,
@@ -12,4 +12,4 @@ const StudentSchema = new mongooes.Schema({
     },
 });
 
-module.exports = mongooes.model("Student",StudentSchema);
+module.exports = mongoose.model("Student",StudentSchema);

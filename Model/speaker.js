@@ -1,12 +1,12 @@
-const mongooes = require('mongoose');
+const mongoose = require('mongoose');
 
-const AddressSchema = new mongooes.Schema({
+const AddressSchema = new mongoose.Schema({
     city:String,
     street:String,
     building:String
 });
 
-const SpeakerSchema = new  mongooes.Schema({
+const SpeakerSchema = new  mongoose.Schema({
 email:{
     type:String,
     unique:true
@@ -24,9 +24,9 @@ address:AddressSchema
 
 
  
-module.exports = mongooes.model("Speaker",SpeakerSchema);
+module.exports = mongoose.model("Speaker",SpeakerSchema);
 
-const db = mongooes.connect("mongodb://localhost:27017/EventSystem")
+const db = mongoose.connect("mongodb://localhost:27017/EventSystem")
 db.then(
    () =>{
 

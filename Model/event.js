@@ -1,15 +1,15 @@
-const mongooes = require('mongoose');
+const mongoose = require('mongoose');
 
-const EventSchema = new mongooes.Schema({
+const EventSchema = new mongoose.Schema({
     _id:Number,
     title:{
         type:String,
         required:true
     },
   eventDate: Date,
-  mainSpeaker:mongooes.Types.ObjectId,
-  otherSpeakers:[{type:mongooes.Types.ObjectId,ref:"Speaker"}],
+  mainSpeaker:mongoose.Types.ObjectId,
+  otherSpeakers:[{type:mongoose.Types.ObjectId,ref:"Speaker"}],
   students:[{type:Number, ref:"Student"}]
 });
 
-module.exports = mongooes.model("Event",EventSchema);
+module.exports = mongoose.model("Event",EventSchema);
