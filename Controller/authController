@@ -1,12 +1,13 @@
 const jwt=require('jsonwebtoken');
 const Student=require("./../Model/student");
-const Speaker=require("./../Model/Speakr");
+const Speaker=require("./../Model/speaker");
 
 module.exports.login=(request,response,next)=>{
         let token;
     ///connection DB
-    if(request.body.username==process.env.adminUsername&&request.body.password==process.env.adminPassWord)
+    if(request.body.username==process.env.adminUsername && request.body.password==process.env.adminPassWord)
     {
+        console.log("hello");
         token=jwt.sign({_id:1,
                     email:request.body.email,
                     role:"admin"},
@@ -17,10 +18,10 @@ module.exports.login=(request,response,next)=>{
     }
     else
     {
-        Speaker.findOne({email:request.body.email,password:request.body.password})
+        Speaker.findOne({username:request.body.username,password:request.body.password})
             .then(data=>{
                 if(data==null){
-                    Student.findOne({email:request.body.email,password:request.body.password})
+                    Student.findOne({username:request.body.username,password:request.body.password})
                     .then(data=>{
                         if(data==null)
                         throw new Error("userName and password incorrect");
