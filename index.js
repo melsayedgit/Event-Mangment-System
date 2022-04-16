@@ -1,8 +1,9 @@
 const express = require('express');
 const body_parser = require('body-parser');
 const mongoose = require('mongoose');
-
+require('dotenv').config();
 //Routers
+const LoginAPI=require("./Routers/authRouter");
 
 const server = express();
 
@@ -18,7 +19,7 @@ server.use(body_parser.urlencoded({extended:false}));
 
 
 // Routers
-
+server.use(LoginAPI)
 
 //Not Found MW
 server.use((request,response)=>{

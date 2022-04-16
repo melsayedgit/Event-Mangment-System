@@ -1,0 +1,50 @@
+const jwt=require('jsonwebtoken');
+const Student=require("./../Model/student");
+const Speaker=require("./../Model/Speakr");
+
+module.exports.login=(request,response,next)=>{
+        let token;
+    ///connection DB
+    if(request.body.username==process.env.adminUsername&&request.body.password==process.env.adminPassWord)
+    {
+        token=jwt.sign({_id:1,
+                    email:request.body.email,
+                    role:"admin"},
+                    process.env.SECRETKEY,
+                    {expiresIn:"1h"});
+        response.status(200).json({msg:"login",token});
+        
+    }
+    else
+    {
+        Speaker.findOne({email:request.body.email,password:request.body.password})
+            .then(data=>{
+                if(data==null){
+                    Student.findOne({email:request.body.email,password:request.body.password})
+                    .then(data=>{
+                        if(data==null)
+                        throw new Error("userName and password incorrect");
+
+                        token=jwt.sign({_id:data._id,
+                            email:data.email,
+                            role:"student"},
+                            process.env.SECRETKEY,
+                            {expiresIn:"1h"});
+                            response.status(200).json({msg:"login",token});
+                    });
+                }
+            
+                token=jwt.sign({_id:data._id,
+                    email:data.email,
+                    role:"speaker"},
+                    process.env.SECRETKEY,
+                    {expiresIn:"1h"});
+                    response.status(200).json({msg:"login",token});
+
+            })
+            .catch(error=>next(error))
+        // next(new Error("userName and password incorrect"))
+    }
+    // connection db findOne() then 
+    
+}
