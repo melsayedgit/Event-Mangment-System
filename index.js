@@ -1,10 +1,11 @@
+require('dotenv').config();
 const express = require('express');
 const body_parser = require('body-parser');
 const mongoose = require('mongoose');
-require('dotenv').config();
 const path = require('path')
+const AuthmMW = require('./Middlleware/authMiddleware');
 //Routers
-const LoginAPI=require("./Router/authRouter");
+const LoginAPI =require("./Router/authRouter");
 
 const server = express();
 
@@ -18,7 +19,12 @@ db.then(()=>{
 server.use(body_parser.json());
 server.use(body_parser.urlencoded({extended:false}));
 
+//auth MD
+server.use(AuthmMW)
+
 server.use(express.static('public'))
+
+
 // Routers
 server.use(LoginAPI)
 

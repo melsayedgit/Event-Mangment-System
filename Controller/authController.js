@@ -1,13 +1,14 @@
 const jwt=require('jsonwebtoken');
-const Student=require("./../Model/student");
-const Speaker=require("./../Model/speaker");
+const Student=require("../Model/student");
+const Speaker=require("../Model/speaker");
 
-module.exports.login=(request,response,next)=>{
+
+module.exports.login = (request,response,next)=>{
         let token;
-    ///connection DB
-    if(request.body.username==process.env.adminUsername && request.body.password==process.env.adminPassWord)
+        console.log("your ino is"+request.body.username +request.body.password);
+    if(request.body.username == process.env.adminUsername && request.body.password==process.env.adminPassWord)
     {
-        console.log("hello");
+        
         token=jwt.sign({_id:1,
                     email:request.body.email,
                     role:"admin"},
@@ -44,8 +45,8 @@ module.exports.login=(request,response,next)=>{
 
             })
             .catch(error=>next(error))
-        // next(new Error("userName and password incorrect"))
+      
     }
-    // connection db findOne() then 
+
     
 }
