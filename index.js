@@ -19,14 +19,14 @@ db.then(()=>{
 server.use(body_parser.json());
 server.use(body_parser.urlencoded({extended:false}));
 
-//auth MD
-server.use(AuthmMW)
 
 server.use(express.static('public'))
 
+//auth MD
+server.use(LoginAPI)
+server.use(AuthmMW)
 
 // Routers
-server.use(LoginAPI)
 
 //Not Found MW
 server.use((request,response)=>{
