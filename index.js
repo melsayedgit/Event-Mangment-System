@@ -6,6 +6,7 @@ const path = require('path')
 const AuthmMW = require('./Middlleware/authMiddleware');
 //Routers
 const LoginAPI =require("./Router/authRouter");
+const StudentAPI = require('./Router/StudentRouter'); 
 
 const server = express();
 
@@ -20,14 +21,14 @@ server.use(body_parser.json());
 server.use(body_parser.urlencoded({extended:false}));
 
 
-server.use(express.static('public'))
+server.use(express.static('public'));
 
 //auth MD
-server.use(LoginAPI)
-server.use(AuthmMW)
+server.use(LoginAPI);
+server.use(AuthmMW);
 
 // Routers
-
+server.use(StudentAPI);
 //Not Found MW
 server.use((request,response)=>{
     response.status(404).json({meassge:"Page is Not Found"});
