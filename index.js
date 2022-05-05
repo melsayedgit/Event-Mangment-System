@@ -7,7 +7,8 @@ const AuthmMW = require('./Middlleware/authMiddleware');
 //Routers
 const LoginAPI =require("./Router/authRouter");
 const StudentAPI = require('./Router/StudentRouter'); 
-const SpeakerAPI = require('./Router/SpeakerRouter'); 
+const SpeakerAPI = require('./Router/SpeakerRouter');
+const EventAPI = require('./Router/EventRouter'); 
 
 const server = express();
 
@@ -31,6 +32,7 @@ server.use(AuthmMW);
 // Routers
 server.use(StudentAPI);
 server.use(SpeakerAPI);
+server.use(EventAPI);
 
 //Not Found MW
 server.use((request,response)=>{

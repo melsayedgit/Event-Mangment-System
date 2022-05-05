@@ -25,9 +25,9 @@ module.exports.editSpeaker = (req,res,next)=>{
        building :req.body.building
      }
  }
-    speaker.findOneAndUpdate({_id:req.params.username},update)
+    speaker.findOneAndUpdate({username:req.params.username},update)
     .then((err,obj)=>{ 
-        res.status(200).json()
+        res.status(200).json({msg:`Speakr:`})
     })
     .catch(err=>res.json(err))
 
@@ -35,7 +35,7 @@ module.exports.editSpeaker = (req,res,next)=>{
 
 /**@type {import("express").RequestHandler} */
 module.exports.deletespeaker = (req,res,next)=>{
-    speaker.deleteOne(req.params.username)
+    speaker.deleteOne({username:req.params.username})
     .then(obj=>{
         res.status(200).json({msg:"Deleted Successfully "})
     })
