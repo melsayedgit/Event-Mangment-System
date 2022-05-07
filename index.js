@@ -4,6 +4,8 @@ const body_parser = require('body-parser');
 const mongoose = require('mongoose');
 const path = require('path')
 const AuthmMW = require('./Middlleware/authMiddleware');
+const cors=require('cors');
+const erroMW =require('./Middlleware/errorMidlleware');
 //Routers
 const LoginAPI =require("./Router/authRouter");
 const StudentAPI = require('./Router/StudentRouter'); 
@@ -21,7 +23,7 @@ db.then(()=>{
 
 server.use(body_parser.json());
 server.use(body_parser.urlencoded({extended:false}));
-
+server.use(cors())
 
 server.use(express.static('public'));
 
@@ -43,6 +45,4 @@ server.use((request,response)=>{
 
 
 //Error
-server.use((error,request,response,next)=>{
-    response.status(500).json({meassge:error+""});
-});
+server.use(erroMW);

@@ -49,7 +49,7 @@ module.exports.RegisterStudent = (req,res,next)=>{
 
            student.create(std)
            .then(ob=> res.status(200).json({msg:`user ${std.username} was Created successfully`}))
-           .catch(err=>res.json(err))
+           .catch(err=>next(err))
 
     })
 
