@@ -14,7 +14,7 @@ module.exports.login = (request,response,next)=>{
                     role:"admin"},
                     process.env.SECRETKEY,
                     {expiresIn:"1h"});
-        response.status(200).json({msg:"logged in",token});
+        response.status(200).json({msg:"logged in",token,role:"admin"});
         
     }
     else
@@ -33,7 +33,7 @@ module.exports.login = (request,response,next)=>{
                             role:"student"},
                             process.env.SECRETKEY,
                             {expiresIn:"1h"});
-                            response.status(200).json({msg:"logged in",token});
+                            response.status(200).json({msg:"logged in",token,role:"student"});
                         }  
                              
                     });
@@ -44,7 +44,7 @@ module.exports.login = (request,response,next)=>{
                     role:"speaker"},
                     process.env.SECRETKEY,
                     {expiresIn:"1h"});
-                    response.status(200).json({msg:"logged in",token});
+                    response.status(200).json({msg:"logged in",token,role:"speaker"});
                 }
                 
             })

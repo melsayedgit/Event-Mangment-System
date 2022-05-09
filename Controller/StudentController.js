@@ -3,12 +3,19 @@ const student = require('../Model/student');
 
 /**@type {import("express").RequestHandler} */
 module.exports.getAllStudents = (req,res,next)=>{
-    student.find({},((error,obj)=>{
-        res.status(200).json(obj.map((st)=>{
-           st.password = undefined;
-            return st;
-            }));
-     }))
+    if(req.role =="admin"){
+        student.find({},((error,obj)=>{
+            res.status(200).json(obj.map((st)=>{
+               st.password = undefined;
+                return st;
+                }));
+         }))
+    
+    }
+else{
+
+
+}
     
 }
 
@@ -19,6 +26,7 @@ module.exports.editStudent = (req,res,next)=>{
      password:req.body.password,
      email:req.body.email
  }
+ 
     student.findOneAndUpdate({_id:req.params.id},update)
     .then((err,obj)=>{ 
         res.status(200).json()

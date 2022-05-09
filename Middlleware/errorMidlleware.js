@@ -9,7 +9,11 @@ module.exports = (error,request,response,next)=>{
           filed:error.keyValue
 
       }   );  
+
     
     }
    
+    else{
+      response.status(500).json()
+    }
 }

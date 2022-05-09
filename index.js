@@ -25,7 +25,7 @@ server.use(body_parser.json());
 server.use(body_parser.urlencoded({extended:false}));
 server.use(cors())
 
-server.use(express.static('public'));
+
 
 //auth MD
 server.use(LoginAPI);
@@ -39,7 +39,7 @@ server.use(EventAPI);
 //Not Found MW
 server.use((request,response)=>{
     response.status(404).json({meassge:"Page is Not Found"});
-
+    
  });
 
 
