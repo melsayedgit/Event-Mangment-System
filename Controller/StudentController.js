@@ -3,24 +3,25 @@ const student = require('../Model/student');
 
 /**@type {import("express").RequestHandler} */
 module.exports.getAllStudents = (req,res,next)=>{
-    if(req.role =="admin"){
+    // if(req.role =="admin"){
         student.find({},((error,obj)=>{
             res.status(200).json(obj.map((st)=>{
                st.password = undefined;
                 return st;
                 }));
          }))
-    
-    }
-else{
+         
+//     }
+// else{
+//     res.status(401)
 
-
-}
+// }
     
 }
 
 /**@type {import("express").RequestHandler} */
 module.exports.editStudent = (req,res,next)=>{
+   
  let update ={
      username:req.body.username,
      password:req.body.password,
@@ -30,13 +31,14 @@ module.exports.editStudent = (req,res,next)=>{
     student.findOneAndUpdate({_id:req.params.id},update)
     .then((err,obj)=>{ 
         res.status(200).json()
+        
     })
 
 }
 
 /**@type {import("express").RequestHandler} */
 module.exports.deleteStudent = (req,res,next)=>{
-    student.deleteOne(req.params.id)
+    student.deleteOne({_id:req.params.id})
     .then(obj=>{
         res.status(200).json({msg:"Deleted Successfully "})
     })

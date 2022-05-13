@@ -3,9 +3,12 @@ const jwt=require("jsonwebtoken");
 module.exports=(request,response,next)=>{
     let token,decodedToken;
     try{
-       token= request.headers["authorization"].split(" ")[1]
+      if(request.headers["authorization"]){
+       token = request.headers["authorization"].split(" ")[1]
        decodedToken= jwt.verify(token, process.env.SECRETKEY);
        console.log(decodedToken)
+       request.role =  decodedToken.role;
+      }
     }
     catch(error)
     {
@@ -13,6 +16,6 @@ module.exports=(request,response,next)=>{
         next(new Error("NotAuthenticated"));
     }
 
-  request.role =  decodedToken.role;
+  
     next();
 }

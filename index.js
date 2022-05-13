@@ -39,10 +39,8 @@ server.use(EventAPI);
 //Not Found MW
 server.use((request,response)=>{
     response.status(404).json({meassge:"Page is Not Found"});
-    
+   
  });
-
-
 
 //Error
 server.use(erroMW);
