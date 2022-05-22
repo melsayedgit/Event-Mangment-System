@@ -16,6 +16,5 @@ module.exports=(request,response,next)=>{
         next(new Error("NotAuthenticated"));
     }
 
-  
     next();
 }

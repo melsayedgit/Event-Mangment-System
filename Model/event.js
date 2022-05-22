@@ -7,7 +7,7 @@ const EventSchema = new mongoose.Schema({
         required:true
     },
   eventDate: Date,
-  mainSpeaker:mongoose.Types.ObjectId,
+  mainSpeaker:{type:mongoose.Types.ObjectId,ref:"Speaker"},
   otherSpeakers:[{type:mongoose.Types.ObjectId,ref:"Speaker"}],
   students:[{type:Number, ref:"Student"}]
 });
