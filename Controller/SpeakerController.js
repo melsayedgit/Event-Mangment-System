@@ -97,7 +97,8 @@ module.exports.EditOwnProfile = (req,res,next)=>{
 
 module.exports.getOwnProfile = (req,res,next)=>{
 speaker.findOne({username:req.username})
-.then((err,obj)=>{
+.then((obj)=>{
+  console.log(obj)
     res.status(200).json(obj)
 }).catch(err=>res.json(err))
 }
