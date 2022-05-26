@@ -30,7 +30,10 @@ module.exports.login = (request,response,next)=>{
                         else{
                         token=jwt.sign({_id:data._id,
                             email:data.email,
-                            role:"student"},
+                            role:"student",
+                            username:request.body.username
+                        
+                        },
                             process.env.SECRETKEY,
                             {expiresIn:"1h"});
                             response.status(200).json({msg:"logged in",token,role:"student"});
@@ -41,7 +44,9 @@ module.exports.login = (request,response,next)=>{
            else{
                 token=jwt.sign({_id:data._id,
                     email:data.email,
-                    role:"speaker"},
+                    role:"speaker",
+                    username:request.body.username
+                },
                     process.env.SECRETKEY,
                     {expiresIn:"1h"});
                     response.status(200).json({msg:"logged in",token,role:"speaker"});

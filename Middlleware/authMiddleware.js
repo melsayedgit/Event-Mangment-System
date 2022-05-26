@@ -8,6 +8,7 @@ module.exports=(request,response,next)=>{
        decodedToken= jwt.verify(token, process.env.SECRETKEY);
        console.log(decodedToken)
        request.role =  decodedToken.role;
+       request.username =  decodedToken.username;
       }
     }
     catch(error)

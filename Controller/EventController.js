@@ -37,7 +37,7 @@ module.exports.editEvent = (req,res,next)=>{
 
 /**@type {import("express").RequestHandler} */
 module.exports.deleteEvent = (req,res,next)=>{
-    event.deleteOne(req.params.id)
+    event.deleteOne({_id:req.params.id})
     .then(obj=>{
         res.status(200).json({msg:"Deleted Successfully "})
     })
@@ -49,7 +49,8 @@ module.exports.createEvent = (req,res,next)=>{
     event.find({}).sort({_id:-1}).limit(1)
     .then((obj)=>{
         let ev;
-      if (obj._id) {
+      if (obj[0]._id) {
+          console.log("hello");
       ev ={
             _id: obj[0]._id+1,
             title:req.body.title,
@@ -61,6 +62,7 @@ module.exports.createEvent = (req,res,next)=>{
       }
  
 else{
+ 
     ev ={
         _id:1,
         title:req.body.title,

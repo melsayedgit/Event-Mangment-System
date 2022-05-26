@@ -63,11 +63,41 @@ module.exports.Registerspeaker = (req,res,next)=>{
                 building :req.body.address.building
               }
         }
-console.log(sp);
+
            speaker.create(sp)
            .then(ob=> res.status(200).json({msg:`user ${sp.username} was Created successfully`}))
            .catch(err=>res.json(err))
 
 
 
+}
+
+/**@type {import("express").RequestHandler} */
+module.exports.EditOwnProfile = (req,res,next)=>{
+    let update ={
+        username:req.body.username,
+        password:req.body.password,
+        email:req.body.email,
+        address:{
+          city :req.body.address.city,
+          street :req.body.address.street,
+          building :req.body.address.building
+        }
+       
+    }
+    
+       speaker.findOneAndUpdate({username:req.username},update)
+       .then((err,obj)=>{ 
+           res.status(200).json({msg:`Speakr:`})
+       })
+       .catch(err=>res.json(err))
+
+}
+/**@type {import("express").RequestHandler} */
+
+module.exports.getOwnProfile = (req,res,next)=>{
+speaker.findOne({username:req.username})
+.then((err,obj)=>{
+    res.status(200).json(obj)
+}).catch(err=>res.json(err))
 }
